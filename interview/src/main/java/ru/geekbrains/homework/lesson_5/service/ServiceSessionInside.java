@@ -30,6 +30,19 @@ public class ServiceSessionInside implements StudentDaoWithoutSession {
         session.close();
     }
 
+    public void saveAmountRandomStudents(int amount){
+        openSession();
+        for (int i = 0; i < amount; i++) {
+            Student student = new Student();
+            student.setName("Student"+i);
+            student.setMark((int) (Math.random()*10));
+            session.save(student);
+        }
+        session.close();
+
+
+    }
+
     @Override
     public Optional<Student> getById(int id) {
         openSession();

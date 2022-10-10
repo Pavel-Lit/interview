@@ -6,7 +6,8 @@ import ru.geekbrains.homework.lesson_5.entities.Student;
 
 public class HiberConnection {
 
-    private static SessionFactory sessionFactory = buildSessionFactory();
+//    private static SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory instance;
 
     private static SessionFactory buildSessionFactory() {
         return new Configuration().configure("hibernate.cfg.xml")
@@ -16,7 +17,10 @@ public class HiberConnection {
     }
 
     public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+        if(instance == null){
+            instance = buildSessionFactory();
+        }
+        return instance;
     }
 
     public static void shutdown(){
